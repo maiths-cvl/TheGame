@@ -1,7 +1,7 @@
 from main import *
 import os
 
-def playerdircheck():
+def playerdircheck(DATADIR):
     if os.path.exists(DATADIR) == False:
         print(os.path.exists(DATADIR))
         print("doesn't exist")
