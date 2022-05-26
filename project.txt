@@ -1,0 +1,46 @@
+The game in python than i want to do but idk what to put inside and if i'm gonna continue after that: (<- this is the title)
+
+Gameplay:
+    Personnage:
+        Annimation
+        Combat
+        Déplacement
+        Interraction with environement
+        Level
+
+    Map:
+        2D Perspective
+        Dungeons
+        Mobs spawn
+        Houses, environement
+
+    Tools, Weapon:
+        Sword
+        Bow
+        Trident (minecraft ref)
+        Crossbow (not minecraft ref, it's a joke it's a minecraft ref)
+
+    Things to do in game:
+        Fight mobs to lvl up and make stuff
+        Quests
+        Final boss
+        Crafting stuff
+        Not too much gathering
+        Dungeons to loot betetr stuff and lvl up (like wynncraft or hypixel skyblock)
+
+Concretly:
+
+    Objects:
+        Entities:
+            Player
+            Mobs
+
+        Item:
+            Weapons:
+                Sword and all stuff like that
+            
+            Usefull items for quests
+
+    Map (idk if it's an object sooooo idk okay):
+        Textures
+        Moovements of the Map
