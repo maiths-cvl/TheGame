@@ -1,4 +1,5 @@
 from objects.entities.entity import Entity
+import pygame
 
 class Player(Entity):
     def __init__(self, name, level, slot, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
@@ -6,7 +7,7 @@ class Player(Entity):
         self.name = name
         self.slot = slot # i think player will have 36 slot
         self.inventory = self.readInv()
-
+        
 
     def saveInventory(self, stuff):
         self.inventory = stuff

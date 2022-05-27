@@ -1,5 +1,8 @@
-class Entity:
+import pygame
+
+class Entity(pygame.sprite.Sprite):
     def __init__(self, level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
+        super().__init__()
         self.level = level
         self.health = health
         self.maxhealth = maxhealth
@@ -10,6 +13,15 @@ class Entity:
         self.defence = defence
 
         self.life = True
+
+        self.sprite_sheet = pygame.image.load('assets/player/player.png')
+        self.image = self.getImage(0, 0)
+        self.rect = self.image.get_rect()
+
+    def getImage(self, x, y):
+        image = pygame.Surface([32, 32])
+        image.blit(self.sprite_sheet, (0, 0), (x, y, 32, 32))
+        return image
 
     def update(self):
         if self.health <= 0:
