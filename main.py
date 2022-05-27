@@ -44,11 +44,11 @@ playerfilescheck(DATADIR, listoffiles)
 #writeIn('options.cfg', listincfg)
 
 
-me = Player("CVL", 1, 20, 20, 20, 20, 20, 10, 15, 20)
+me = Player("CVL", 1, 36, 20, 20, 20, 20, 10, 15, 20)
 print(me.inventory)
 
 stuff = ['one', 'two', 'three', 'four']
-me.inv(stuff)
+me.saveInventory(stuff)
 me.inventory = me.readInv()
 print(me.inventory)
 
@@ -69,9 +69,18 @@ while run:
     
     for i in entityalive:
         i.update()
+
+    
+
+    me.playerUpdate()
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            
+            # before exit
+            me.saveInventory(me.inventory)
+
+
             run = False
             quit()
 

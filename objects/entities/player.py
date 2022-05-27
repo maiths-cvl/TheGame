@@ -4,11 +4,11 @@ class Player(Entity):
     def __init__(self, name, level, slot, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
         super().__init__(level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence)
         self.name = name
-        self.slot = slot
+        self.slot = slot # i think player will have 36 slot
         self.inventory = self.readInv()
 
 
-    def inv(self, stuff):
+    def saveInventory(self, stuff):
         self.inventory = stuff
 
         with open('data/PLAYER/inventory/inventory.txt', "w+") as file:
@@ -22,3 +22,6 @@ class Player(Entity):
             listof = listof.split(';')
             listof.remove('')
             return listof
+
+    def playerUpdate(self):
+        self.inventory = self.readInv()
