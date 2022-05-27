@@ -1,26 +1,24 @@
 from objects.entities.entity import Entity
 
 class Player(Entity):
-    def __init__(self, name, level, inventory, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
+    def __init__(self, name, level, slot, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
         super().__init__(level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence)
         self.name = name
-        self.inventory = inventory
+        self.slot = slot
+        self.inventory = self.readInv()
+
 
     def inv(self, stuff):
-        if type(stuff) != list:
-            print('here bro')
-            return
+        self.inventory = stuff
 
-        f = open('data/PLAYER/inventory/inventory.cfg', 'w+')
-        if "[inventory]\n" in f.read():
-            print("inventory ready")
-        else:
-            f.write("[inventory]\n")
-            print("inventory was just initialized")
+        with open('data/PLAYER/inventory/inventory.txt', "w+") as file:
+            for i in stuff:
+                file.write(str(i) + ";")
+            file.close()
 
-        num = 1
-        for i in stuff:
-            print(i)
-            with open('data/PLAYER/inventory/inventory.cfg', 'a+') as file:
-                file.write("\n" + str(num) +  " = " + str(i))
-                num += 1
+    def readInv(self):
+        with open('data/PLAYER/inventory/inventory.txt', "r+") as file:
+            listof = file.read()
+            listof = listof.split(';')
+            listof.remove('')
+            return listof

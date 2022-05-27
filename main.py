@@ -29,7 +29,7 @@ print(key)
 DATADIR = config['options']['datapath']
 
 listofdir = ['data/', 'data/PLAYER/', 'data/PLAYER/inventory/', 'data/world/', 'data/world/environement/', 'data/world/enities/']
-listoffiles = ['data/PLAYER/inventory/inventory.cfg', 'data/PLAYER/inventory/state.cfg']
+listoffiles = ['data/PLAYER/inventory/inventory.txt', 'data/PLAYER/inventory/state.cfg']
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("The game i'm creating right now but idk the name so shut up")
@@ -45,8 +45,12 @@ playerfilescheck(DATADIR, listoffiles)
 
 
 me = Player("CVL", 1, 20, 20, 20, 20, 20, 10, 15, 20)
+print(me.inventory)
+
 stuff = ['one', 'two', 'three', 'four']
 me.inv(stuff)
+me.inventory = me.readInv()
+print(me.inventory)
 
 otherone = Entity(1, 20, 20, 20, 20, 10, 15, 20)
 othertwo = Entity(1, 20, 20, 20, 20, 10, 15, 20)
