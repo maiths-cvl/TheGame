@@ -1,5 +1,0 @@
-maxfps: 144
-forward: 
-backwards:
-lef:
-right:
