@@ -26,4 +26,8 @@ class Item(pygame.sprite.Sprite):
     def update(self):
         self.rect.topleft = self.position
 
+    def swordAnimation(self):
+        self.image = pygame.transform.rotozoom(self.image, 90, 1)
+        self.image.set_colorkey([0, 0, 0])
+
     

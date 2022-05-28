@@ -126,6 +126,9 @@ while run:
     me.playerUpdate()
     
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                item.swordAnimation()
         if event.type == pygame.QUIT:
             
             # before exit
