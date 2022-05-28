@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="40">
  <tileset firstgid="1" source="nature.tsx"/>
- <layer id="1" name="Calque de Tuiles 1" width="50" height="50">
+ <layer id="1" name="background" width="50" height="50">
   <data encoding="csv">
 333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,333,334,
 373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,373,374,
@@ -217,4 +217,32 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="3" name="player" x="89.3333" y="290.667">
+   <point/>
+  </object>
+  <object id="13" type="collision" x="-4" y="-8" width="809.333" height="39.3333"/>
+  <object id="15" type="collision" x="768.667" y="31.3333" width="36.6667" height="770"/>
+  <object id="16" type="collision" x="-5.33333" y="768.667" width="774" height="30"/>
+  <object id="17" type="collision" x="-4" y="31" width="34" height="737"/>
+  <object id="19" type="collision" x="369" y="32" width="46" height="334"/>
+  <object id="21" type="collision" x="368" y="415.75" width="48" height="95.5"/>
+  <object id="22" type="collision" x="400.25" y="496" width="31.5" height="159.75"/>
+  <object id="23" type="collision" x="400.25" y="688" width="31.5" height="31.5"/>
+  <object id="24" type="collision" x="416.5" y="704" width="126.5" height="31.5"/>
+  <object id="25" type="collision" x="512.5" y="751.75" width="47" height="16"/>
+  <object id="26" type="collision" x="432.5" y="735.75" width="110.75" height="15.25"/>
+  <object id="27" type="collision" x="30.25" y="480.25" width="273.25" height="30.75"/>
+  <object id="28" type="collision" x="302.5" y="496.25" width="17.25" height="15.5"/>
+  <object id="29" type="collision" x="160" y="159.75" width="32" height="160.25"/>
+  <object id="30" type="collision" x="191.75" y="159.75" width="127.75" height="16"/>
+  <object id="31" type="collision" x="304.25" y="176" width="15.25" height="143.25"/>
+  <object id="32" type="collision" x="192.25" y="304.25" width="112.25" height="15.5"/>
+  <object id="33" type="collision" x="512" y="80.3333" width="15.6667" height="559.667"/>
+  <object id="34" type="collision" x="592.333" y="751.667" width="15" height="16.6667"/>
+  <object id="35" type="collision" x="592.25" y="672.375" width="15.375" height="47.25"/>
+  <object id="36" type="collision" x="607.875" y="672.375" width="160.875" height="15.375"/>
+  <object id="37" type="collision" x="144.364" y="672.364" width="191.091" height="15.2727"/>
+  <object id="39" type="collision" x="369" y="365.909" width="14.0909" height="17.3636"/>
+ </objectgroup>
 </map>

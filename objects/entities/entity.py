@@ -1,22 +1,30 @@
 import pygame
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence):
+    def __init__(self, level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence, x ,y):
         super().__init__()
         self.level = level
         self.health = health
         self.maxhealth = maxhealth
         self.food = food
         self.maxfood = maxfood
-        self.walkspeed = walkspeed
+        self.walkspeed = walkspeed / 10
         self.attackDmg = attackDmg
         self.defence = defence
+        self.position = [x, y]
 
         self.life = True
 
         self.sprite_sheet = pygame.image.load('assets/player/player.png')
         self.image = self.getImage(0, 0)
+        self.image.set_colorkey([0, 0, 0])
         self.rect = self.image.get_rect()
+
+        self.feet = pygame.Rect(0, 0, self.rect.width * 0.5, 12)
+        self.old_position = self.position.copy()
+
+    def saveLocation(self):
+        self.old_position = self.position.copy()
 
     def getImage(self, x, y):
         image = pygame.Surface([32, 32])
@@ -30,6 +38,14 @@ class Entity(pygame.sprite.Sprite):
         if self.health > 0:
             self.life = True
             #print(str(self) + " is living")
+
+        self.rect.topleft = self.position
+        self.feet.midbottom = self.rect.midbottom
+
+    def moveBack(self):
+        self.position = self.old_position
+        self.rect.topleft = self.position
+        self.feet.midbottom = self.rect.midbottom
 
     def attack(self, target):
         if type(target) == list:

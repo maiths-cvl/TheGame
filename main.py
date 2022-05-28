@@ -43,7 +43,7 @@ map_layer = pyscroll.orthographic.BufferedRenderer(map_data, screen.get_size())
 map_layer.zoom = 2
 
 # dessiner le groupe de calque
-group = pyscroll.PyscrollGroup(map_layer=map_layer, delfault_layer=1)
+group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=3)
 
 # initalize here bro plz
 
@@ -54,9 +54,12 @@ playerfilescheck(DATADIR, listoffiles)
 
 #writeIn('options.cfg', listincfg)
 
+player_pos = tmx_data.get_object_by_name("player")
 
-me = Player("CVL", 1, 36, 20, 20, 20, 20, 10, 15, 20)
+me = Player("CVL", 1, 36, 20, 20, 20, 20, 10, 15, 20, player_pos.x, player_pos.y)
 print(me.inventory)
+
+
 
 stuff = ['one', 'two', 'three', 'four']
 me.saveInventory(stuff)
@@ -64,20 +67,34 @@ me.inventory = me.readInv()
 print(me.inventory)
 
 
+"""
+otherone = Entity(1, 20, 20, 20, 20, 10, 15, 20, 20, 20)
+othertwo = Entity(1, 20, 20, 20, 20, 10, 15, 20, 13, 13)"""
 
-otherone = Entity(1, 20, 20, 20, 20, 10, 15, 20)
-othertwo = Entity(1, 20, 20, 20, 20, 10, 15, 20)
+entityalive = [me]
 
-entityalive = [me, otherone, othertwo]
+# liste qui stocke les rectangles de collision
+walls = []
+
+for obj in tmx_data.objects:
+    if obj.type == "collision":
+        walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
 group.add(me)
+
+def update():
+    group.update()
+
+    for sprite in group.sprites():
+        if sprite.feet.collidelist(walls) > -1:
+            sprite.moveBack()
 
 clock = pygame.time.Clock()
 run = True
 
 while run:
 
-    clock.tick(MAXFPS)
+    clock.tick(125)
     screen.fill(WHITE)
 
     allGameCheck(DATADIR, listofdir)
@@ -85,6 +102,10 @@ while run:
     for i in entityalive:
         i.update()
 
+    me.saveLocation()
+    me.handleInput()
+    update()
+    group.center(me.rect)
     group.draw(screen)
 
     me.playerUpdate()
@@ -99,5 +120,5 @@ while run:
             run = False
             quit()
 
-    
+    pygame.display.flip()
     pygame.display.update()
