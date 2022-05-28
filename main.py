@@ -4,6 +4,9 @@ from utils.getfromconfig import *
 from utils.onStart import *
 from utils.allGame import *
 from utils.writecfg import *
+from objects.items.items import *
+from objects.items.weapons.weapon import *
+from objects.items.weapons.sword import *
 import os
 import pygame
 from configparser import ConfigParser
@@ -33,7 +36,7 @@ DATADIR = config['options']['datapath']
 listofdir = ['data/', 'data/PLAYER/', 'data/PLAYER/inventory/', 'data/world/', 'data/world/environement/', 'data/world/enities/']
 listoffiles = ['data/PLAYER/inventory/inventory.txt', 'data/PLAYER/inventory/state.cfg']
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption("The game i'm creating right now but idk the name so shut up")
 
 tmx_data = pytmx.util_pygame.load_pygame('data/world/environement/map.tmx')
@@ -55,6 +58,7 @@ playerfilescheck(DATADIR, listoffiles)
 #writeIn('options.cfg', listincfg)
 
 player_pos = tmx_data.get_object_by_name("player")
+sword_pos = tmx_data.get_object_by_name("player")
 
 me = Player("CVL", 1, 36, 20, 20, 20, 20, 10, 15, 20, player_pos.x, player_pos.y)
 print(me.inventory)
@@ -66,12 +70,16 @@ me.saveInventory(stuff)
 me.inventory = me.readInv()
 print(me.inventory)
 
+sword = Sword(sword_pos.x, sword_pos.y, "Arthur's King sword", ["This is the first line", "And it's the seconde one"], 'sword', 30, 200, 3, 'assets/items/weapon/sword.png')
+item = Item(270, 270, "name", "lore", "type", 'assets/items/weapon/sword.png')
 
-"""
-otherone = Entity(1, 20, 20, 20, 20, 10, 15, 20, 20, 20)
-othertwo = Entity(1, 20, 20, 20, 20, 10, 15, 20, 13, 13)"""
 
-entityalive = [me]
+# otherone = Entity(1, 20, 20, 20, 20, 10, 15, 20, player_pos.x + 100, player_pos.y + 50)
+"""othertwo = Entity(1, 20, 20, 20, 20, 10, 15, 20, 13, 13)"""
+
+#totalObj = [me, sword]
+
+objectupdate = [me, sword]
 
 # liste qui stocke les rectangles de collision
 walls = []
@@ -81,13 +89,15 @@ for obj in tmx_data.objects:
         walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
 group.add(me)
+group.add(item)
 
 def update():
     group.update()
 
     for sprite in group.sprites():
-        if sprite.feet.collidelist(walls) > -1:
-            sprite.moveBack()
+        if type(sprite) == Entity or type(sprite) == Player:
+            if sprite.feet.collidelist(walls) > -1:
+                sprite.moveBack()
 
 clock = pygame.time.Clock()
 run = True
@@ -96,10 +106,13 @@ while run:
 
     clock.tick(125)
     screen.fill(WHITE)
+    # screen.blit(sword.image, (sword.position[0], sword.position[1]))
+
+    
 
     allGameCheck(DATADIR, listofdir)
     
-    for i in entityalive:
+    for i in objectupdate:
         i.update()
 
     me.saveLocation()
@@ -107,6 +120,8 @@ while run:
     update()
     group.center(me.rect)
     group.draw(screen)
+
+    item.getHanded(me)
 
     me.playerUpdate()
     

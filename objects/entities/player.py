@@ -1,4 +1,3 @@
-from turtle import position
 from objects.entities.entity import Entity
 import pygame
 
@@ -39,6 +38,10 @@ class Player(Entity):
 
     def playerUpdate(self):
         self.inventory = self.readInv()
+
+        with open("data/PLAYER/inventory/state.cfg", "w+") as file:
+            file.write("[state]\n" + "live = " + str(self.life))
+
 
     def handleInput(self):
         pressed = pygame.key.get_pressed()

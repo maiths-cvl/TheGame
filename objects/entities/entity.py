@@ -13,6 +13,8 @@ class Entity(pygame.sprite.Sprite):
         self.defence = defence
         self.position = [x, y]
 
+        self.itemInHand = None
+
         self.life = True
 
         self.sprite_sheet = pygame.image.load('assets/player/player.png')
@@ -34,7 +36,7 @@ class Entity(pygame.sprite.Sprite):
     def update(self):
         if self.health <= 0:
             self.life = False
-            #print("you died")
+            print("you died")
         if self.health > 0:
             self.life = True
             #print(str(self) + " is living")
@@ -56,5 +58,4 @@ class Entity(pygame.sprite.Sprite):
             target.hit(self.attackDmg)
 
     def hit(self, damage):
-        calc = damage / (1 + (self.defence / 10))
-        self.health -= calc
+        self.health -= (damage / (1 + (self.defence / 10)))
