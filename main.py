@@ -127,7 +127,6 @@ while run:
 
     clock.tick(125)
     screen.fill(WHITE)
-    # screen.blit(sword.image, (sword.position[0], sword.position[1]))
     
 
     allGameCheck(DATADIR, listofdir)
