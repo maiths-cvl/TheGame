@@ -9,6 +9,8 @@ class Item(pygame.sprite.Sprite):
 
         self.position = [x, y]
 
+        self.textureis = "sword"
+
         self.sprite_sheet = pygame.image.load(texture)
         self.image = self.getImage(0, 0)
         # self.image = pygame.transform.scale(self.image, (32, 32)) resize the picture
@@ -20,7 +22,7 @@ class Item(pygame.sprite.Sprite):
         image.blit(self.sprite_sheet, (0, 0), (x, y, 32, 32))
         return image
 
-    def getHanded(self, other):
+    def getHeld(self, other):
         self.position = [other.position[0] + 20, other.position[1] - 4]
 
     def update(self):

@@ -33,6 +33,7 @@ print(key)
 
 DATADIR = config['options']['datapath']
 
+
 listofdir = ['data/', 'data/PLAYER/', 'data/PLAYER/inventory/', 'data/world/', 'data/world/environement/', 'data/world/enities/']
 listoffiles = ['data/PLAYER/inventory/inventory.txt', 'data/PLAYER/inventory/state.cfg']
 
@@ -88,6 +89,18 @@ for obj in tmx_data.objects:
     if obj.type == "collision":
         walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
+road = []
+
+for obj in tmx_data.objects:
+    if obj.type == "road":
+        road.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
+river = []
+
+for obj in tmx_data.objects:
+    if obj.type == "river":
+        river.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
 group.add(me)
 group.add(item)
 
@@ -98,6 +111,14 @@ def update():
         if type(sprite) == Entity or type(sprite) == Player:
             if sprite.feet.collidelist(walls) > -1:
                 sprite.moveBack()
+            if sprite.feet.collidelist(road) > -1:
+                sprite.walkspeed = 1.2
+            if sprite.feet.collidelist(road) <= -1:
+                sprite.walkspeed = 1
+            if sprite.feet.collidelist(river) > -1:
+                sprite.walkspeed = 0.65
+            if sprite.feet.collidelist(river) <= -1:
+                sprite.walkspeed = 1
 
 clock = pygame.time.Clock()
 run = True
@@ -107,7 +128,6 @@ while run:
     clock.tick(125)
     screen.fill(WHITE)
     # screen.blit(sword.image, (sword.position[0], sword.position[1]))
-
     
 
     allGameCheck(DATADIR, listofdir)
@@ -121,14 +141,15 @@ while run:
     group.center(me.rect)
     group.draw(screen)
 
-    item.getHanded(me)
+    item.getHeld(me)
 
     me.playerUpdate()
     
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                item.swordAnimation()
+            mouse_presses = pygame.mouse.get_pressed()
+            if mouse_presses[2]:
+                me.attackAnimation(item)
         if event.type == pygame.QUIT:
             
             # before exit

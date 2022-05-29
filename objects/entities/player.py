@@ -58,3 +58,21 @@ class Player(Entity):
         if pressed[pygame.K_q]:
             self.position[0] -= self.walkspeed
             self.changeAnimation("left")
+
+    def attackAnimation(self, held):
+        if held == "hand":
+            return
+
+        if held.textureis == "sword":
+            held.image = pygame.image.load('assets/items/weapon/wand.png')
+            self.image.set_colorkey([0, 0, 0])
+            held.textureis = "wand"
+        elif held.textureis == "wand":
+            held.image = pygame.image.load('assets/items/weapon/nothing.png')
+            self.image.set_colorkey([0, 0, 0])
+            held.textureis = "hand"
+        elif held.textureis == "hand":
+            held.image = pygame.image.load('assets/items/weapon/sword.png')
+            self.image.set_colorkey([0, 0, 0])
+            held.textureis = "sword"
+            

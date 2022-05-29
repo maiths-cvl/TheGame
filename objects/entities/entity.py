@@ -1,4 +1,5 @@
 import pygame
+from objects.items.items import *
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, level, health, maxhealth, food, maxfood, walkspeed, attackDmg, defence, x ,y):
@@ -17,7 +18,7 @@ class Entity(pygame.sprite.Sprite):
 
         self.life = True
 
-        self.sprite_sheet = pygame.image.load('assets/player/player.png')
+        self.sprite_sheet = pygame.image.load('assets/player/player2.png')
         self.image = self.getImage(0, 0)
         self.image.set_colorkey([0, 0, 0])
         self.rect = self.image.get_rect()
